@@ -7,9 +7,9 @@
 
 /** constants insert, delete, max word(s) & stack nodes */
 enum { INS, DEL, WRDMAX = 256, STKMAX = 512, LMAX = 1024 };
-#define REF INS
-#define CPY DEL
-
+#define REF INS //set to 0
+#define CPY DEL //set to 1
+#define REF_MASK 1 //set to 1
 /* timing helper function */
 static double tvgetf(void)
 {
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     while ((rtn = fscanf(fp, "%s", word)) != EOF) {
         char *p = word;
         /* FIXME: insert reference to each string */
-        if (!tst_ins_del(&root, &p, INS, CPY)) {
+        if (!tst_ins_del(&root, &p, INS, REF)) {
             fprintf(stderr, "error: memory exhausted, tst_insert.\n");
             fclose(fp);
             return 1;
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
             p = word;
             t1 = tvgetf();
             /* FIXME: insert reference to each string */
-            res = tst_ins_del(&root, &p, INS, CPY);
+            res = tst_ins_del(&root, &p, INS, REF);
             t2 = tvgetf();
             if (res) {
                 idx++;
@@ -139,7 +139,7 @@ int main(int argc, char **argv)
             printf("  deleting %s\n", word);
             t1 = tvgetf();
             /* FIXME: remove reference to each string */
-            res = tst_ins_del(&root, &p, DEL, CPY);
+            res = tst_ins_del(&root, &p, DEL, REF);
             t2 = tvgetf();
             if (res)
                 printf("  delete failed.\n");
