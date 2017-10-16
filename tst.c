@@ -271,7 +271,7 @@ void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
         /* Place nodes until end of the string, at end of stign allocate
          * space for data, copy data as final eqkid, and return.
          */
-        if (*p++ == 0) {
+        if (*p++ == 0) {    
             if (cpy) { /* allocate storage for 's' */
                 const char *eqdata = strdup(*s);
                 if (!eqdata)
@@ -326,8 +326,10 @@ void tst_suggest(const tst_node *p,
     tst_suggest(p->lokid, c, nchr, a, n, max);
     if (p->key)
         tst_suggest(p->eqkid, c, nchr, a, n, max);
-    else if (*(((char *) p->eqkid) + nchr - 1) == c)
-        a[(*n)++] = (char *) p->eqkid;
+    else if (*(((char *) p->eqkid) + nchr - 1) == c ){
+    if (*n < max)    //to limit the range of *n
+    a[(*n)++] = (char *) p->eqkid;
+}
     tst_suggest(p->hikid, c, nchr, a, n, max);
 }
 

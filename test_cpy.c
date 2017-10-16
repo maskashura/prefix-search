@@ -7,8 +7,8 @@
 
 /** constants insert, delete, max word(s) & stack nodes */
 enum { INS, DEL, WRDMAX = 256, STKMAX = 512, LMAX = 1024 };
-#define REF INS
-#define CPY DEL
+#define REF INS  //set to 0
+#define CPY DEL  //set to 1
 
 /* timing helper function */
 static double tvgetf(void)
